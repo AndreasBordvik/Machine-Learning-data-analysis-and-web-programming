@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h1>Diabetes</h1>
+<img src={{ url}} >
+
+<form action="plot" method="POST">
+  <input type="checkbox" value=True name="plot_error">  Coloring of wrong predictions<br>
+  
+  Choose classifier type:<br>
+  <p>
+  <select name= classifiers method="GET" action="/">
+    {% for classifier in classifiers %}
+    <option value= "{{classifier}}" SELECTED>{{classifier}}</option>"
+    {% endfor %}
+  </select>
+  </p>
+  
+  Choose features1-8 for prediction.(Choosing two features will generate a plot) :<br>
+  {% for e in range(featureTypes.__len__()-1) %}
+	<select name= feat method="GET" action="/">
+	{% for feat in featureTypes %}
+		<option name="features" value= "{{feat}}" SELECTED>{{feat}}</option>
+    {% endfor %}
+    </select>
+  {% endfor %}
+
+  <br>
+  <input type="submit" value="Plot">
+  <br>
+  
+  <p>Choosen feature: {{features}} </p> 
+  <p>Prediction score: <td>{{ z }}</td> </p>
+  <p>Classifier: <td>{{ clf }}</td> </p>
+  
+</form>
+
+{% endblock %}
